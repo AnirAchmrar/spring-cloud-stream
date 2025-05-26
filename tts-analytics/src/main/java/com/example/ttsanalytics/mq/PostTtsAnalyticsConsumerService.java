@@ -15,7 +15,6 @@ public class PostTtsAnalyticsConsumerService {
 
     @Bean
     public Consumer<PostTtsAnalyticsRequest> postTtsAnalytics() {
-        // Your processing logic here
         return this::processAnalytics;
     }
 
