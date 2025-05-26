@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: tts
+  cloud:
+    stream:
+      bindings:
+        postTtsAnalytics-out-0:
+          destination: post-tts-analytics
+          content-type: application/json
+      # Default binder selection
+      default-binder: ${BINDER_TYPE:rabbit}
+  rabbitmq:
+    addresses: ${RABBITMQ_URI:amqp://guest:guest@localhost:5672/}
+  kafka:
+    bootstrap-servers: ${KAFKA_URI:localhost:9092}
+server:
+  port: 8080
+tts:
+  output:
+    base-path: output
+  #analyticsUrl: http://tts-analytics-svc.spring-boot.svc.cluster.local:8090/
+  analyticsUrl: http://localhost:8090/

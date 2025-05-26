@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: tts-analytics
+  cloud:
+    stream:
+      bindings:
+        postTtsAnalytics-in-0:
+          destination: post-tts-analytics
+          content-type: application/json
+          group: analytics-group
+          consumer:
+            max-attempts: 3                # Retry attempts
+            back-off-initial-interval: 1000 # Retry delay
+      default-binder: ${BINDER_TYPE:rabbit}
+  rabbitmq:
+    addresses: ${RABBITMQ_URI:amqp://guest:guest@localhost:5672/}
+  kafka:
+    bootstrap-servers: ${KAFKA_URI:localhost:9092}
+    consumer:
+      group-id: analytics-group
+server:
+  port: 8090
